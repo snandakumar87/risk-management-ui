@@ -10,7 +10,7 @@ public class TransactionConsumer {
 
     private static final Logger LOGGER = Logger.getLogger("MovieConsumer");
 
-    @Incoming("transaction-from-kafka")
+    @Incoming("txn-from-kafka")
     public void receive(Transaction transaction) {
         LOGGER.infof("Received movie: %s (%d)", transaction.getId(), transaction.getAmount());
     }

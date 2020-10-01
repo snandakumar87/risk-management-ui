@@ -19,7 +19,7 @@ public class TransactionResource {
 
     private static final Logger LOGGER = Logger.getLogger("MovieResource");
 
-    @Inject @Channel("transaction") Emitter<Transaction> emitter;
+    @Inject @Channel("txn") Emitter<Transaction> emitter;
 
 
     @POST
