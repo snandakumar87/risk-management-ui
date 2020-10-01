@@ -15,7 +15,7 @@ import javax.ws.rs.core.Response;
 @Path("/transaction")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-public class MovieResource {
+public class TransactionResource {
 
     private static final Logger LOGGER = Logger.getLogger("MovieResource");
 
