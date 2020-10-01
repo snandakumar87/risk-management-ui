@@ -1,4 +1,4 @@
-package me.escoffier;
+package com.redhat;
 
 public class    Transaction {
     private String id;

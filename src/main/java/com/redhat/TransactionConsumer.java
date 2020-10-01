@@ -1,4 +1,4 @@
-package me.escoffier;
+package com.redhat;
 
 import org.eclipse.microprofile.reactive.messaging.Channel;
 import org.eclipse.microprofile.reactive.messaging.Emitter;
