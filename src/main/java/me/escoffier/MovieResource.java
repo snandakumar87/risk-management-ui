@@ -1,6 +1,5 @@
 package me.escoffier;
 
-import me.escoffier.quarkus.Movie;
 import org.eclipse.microprofile.reactive.messaging.Channel;
 import org.eclipse.microprofile.reactive.messaging.Emitter;
 import org.jboss.logging.Logger;
@@ -20,13 +19,13 @@ public class MovieResource {
 
     private static final Logger LOGGER = Logger.getLogger("MovieResource");
 
-    @Inject @Channel("movies") Emitter<Movie> emitter;
+    @Inject @Channel("transaction") Emitter<Transaction> emitter;
 
 
     @POST
-    public Response enqueueMovie(Movie movie) {
-        LOGGER.infof("Sending movie %s to Kafka", movie.getTitle());
-        emitter.send(movie);
+    public Response enqueueMovie(Transaction transaction) {
+        LOGGER.infof("Sending movie %s to Kafka", transaction.getId());
+        emitter.send(transaction);
         return Response.accepted().build();
     }
 
