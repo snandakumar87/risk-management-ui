@@ -1,5 +1,6 @@
 package com.redhat;
 
+import io.vertx.mutiny.core.eventbus.EventBus;
 import org.eclipse.microprofile.reactive.messaging.Channel;
 import org.eclipse.microprofile.reactive.messaging.Emitter;
 import org.eclipse.microprofile.reactive.messaging.Incoming;
@@ -10,6 +11,9 @@ import javax.inject.Inject;
 
 @ApplicationScoped
 public class TransactionConsumer {
+
+    @Inject
+    EventBus eventBus;
 
     @Inject
     @Channel("txn-whitelist")
@@ -26,6 +30,7 @@ public class TransactionConsumer {
             } else if(transaction.getCountry().equals("US") && transaction.getMerchantId().equals("MERCH0002")){
                 LOGGER.info("message check failed");
             } else {
+                eventBus.publish("transaction_stream", transaction);
                 emitter.send(transaction);
             }
         }catch (Exception e){
