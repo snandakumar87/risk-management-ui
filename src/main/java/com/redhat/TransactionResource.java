@@ -24,7 +24,7 @@ public class TransactionResource {
     public Multi<JsonObject> stream()
     {
         System.out.println("Came to post call");
-        return eventBus.<JsonObject>consumer("order_stream")
+        return eventBus.<JsonObject>consumer("transaction_stream")
                 .toMulti()
                 .map(b -> b.body());
     }
