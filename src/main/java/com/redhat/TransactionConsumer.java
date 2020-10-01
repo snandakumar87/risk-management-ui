@@ -1,5 +1,6 @@
 package com.redhat;
 
+import io.vertx.core.json.JsonObject;
 import io.vertx.mutiny.core.eventbus.EventBus;
 import org.eclipse.microprofile.reactive.messaging.Channel;
 import org.eclipse.microprofile.reactive.messaging.Emitter;
@@ -30,7 +31,8 @@ public class TransactionConsumer {
             } else if(transaction.getCountry().equals("US") && transaction.getMerchantId().equals("MERCH0002")){
                 LOGGER.info("message check failed");
             } else {
-                eventBus.publish("transaction_stream", transaction);
+                final JsonObject jsonObject = JsonObject.mapFrom(transaction);
+                eventBus.publish("transaction_stream", jsonObject);
                 emitter.send(transaction);
             }
         }catch (Exception e){
