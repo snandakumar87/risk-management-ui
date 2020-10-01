@@ -1,10 +1,13 @@
 package me.escoffier;
 
-public class Transaction {
+public class    Transaction {
     private String id;
     private String country;
     private String amount;
     private String merchantId;
+
+    public Transaction() {
+    }
 
     public Transaction(String id, String country, String amount, String merchantId) {
         this.id = id;
