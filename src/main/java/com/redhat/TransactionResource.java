@@ -19,7 +19,7 @@ public class TransactionResource {
 
     @GET
     @Path("/stream")
-    @Produces(MediaType.SERVER_SENT_EVENTS)
+    @Produces(MediaType.APPLICATION_JSON)
     @SseElementType(MediaType.APPLICATION_JSON)
     public Multi<JsonObject> stream()
     {
