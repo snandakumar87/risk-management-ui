@@ -19,14 +19,13 @@ public class TransactionResource {
 
     @GET
     @Path("/stream")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.SERVER_SENT_EVENTS)
     @SseElementType(MediaType.APPLICATION_JSON)
     public Multi<JsonObject> stream()
     {
         System.out.println("Came to post call");
-
-        eventBus.<JsonObject>consumer("txn_stream",message -> System.out.println("Received news on consumer 1: " + message.body()));
-      return null;
+        return eventBus.<JsonObject>consumer("txn_stream")
+                .bodyStream().toMulti();
     }
 
 
