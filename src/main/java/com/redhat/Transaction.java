@@ -1,6 +1,8 @@
 package com.redhat;
 
-public class    Transaction {
+import java.io.Serializable;
+
+public class  Transaction implements Serializable {
     private String id;
     private String country;
     private String amount;

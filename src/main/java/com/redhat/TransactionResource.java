@@ -4,7 +4,9 @@ import io.quarkus.vertx.ConsumeEvent;
 import io.smallrye.mutiny.Multi;
 import io.vertx.core.json.JsonObject;
 import io.vertx.mutiny.core.eventbus.EventBus;
+import org.eclipse.microprofile.reactive.messaging.Channel;
 import org.jboss.resteasy.annotations.SseElementType;
+import org.reactivestreams.Publisher;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;
@@ -14,21 +16,21 @@ import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
 import java.util.List;
 
-@Path("/")
+@Path("/transaction")
 public class TransactionResource {
 
+
     @Inject
-    EventBus eventBus;
-
-
+    @Channel("my-data-stream")
+    Publisher<String> transactionPublisher;
 
     @GET
     @Path("/stream")
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<JsonObject> stream()
+    @Produces(MediaType.SERVER_SENT_EVENTS)
+    @SseElementType(MediaType.TEXT_PLAIN)
+    public Publisher<String> stream()
     {
-      System.out.println(TransactionConsumer.returnEventBusContents());
-      return TransactionConsumer.returnEventBusContents();
+        return transactionPublisher;
     }
 
 

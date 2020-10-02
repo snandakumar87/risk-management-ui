@@ -1,11 +1,13 @@
 package com.redhat;
 
 import io.smallrye.mutiny.Multi;
+import io.smallrye.reactive.messaging.annotations.Broadcast;
 import io.vertx.core.json.JsonObject;
 import io.vertx.mutiny.core.eventbus.EventBus;
 import org.eclipse.microprofile.reactive.messaging.Channel;
 import org.eclipse.microprofile.reactive.messaging.Emitter;
 import org.eclipse.microprofile.reactive.messaging.Incoming;
+import org.eclipse.microprofile.reactive.messaging.Outgoing;
 import org.jboss.logging.Logger;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -16,42 +18,41 @@ import java.util.List;
 @ApplicationScoped
 public class TransactionConsumer {
 
-    @Inject
-    EventBus eventBus;
 
-    static List<JsonObject> jsonObjs = new ArrayList<>();
 
-    @Inject
-    @Channel("txn-whitelist")
-    Emitter<Transaction> emitter;
+    List<JsonObject> jsonObjs = new ArrayList<>();
 
 
 
     private static final Logger LOGGER = Logger.getLogger("TransactionCins");
 
+//    @Incoming("txn-from-kafka")
+//    public void receive(Transaction transaction) {
+//        System.out.println("inside consumer");
+//        LOGGER.infof("Received movie:", transaction.getId(), transaction.getAmount());
+//        try {
+//            if (transaction.getMerchantId().equals("MERCH0001") && transaction.getCountry().equals("IR")) {
+//                LOGGER.info("message check failed");
+//            } else if(transaction.getCountry().equals("US") && transaction.getMerchantId().equals("MERCH0002")){
+//                LOGGER.info("message check failed");
+//            } else {
+//                System.out.println("publised");
+//                final JsonObject jsonObject = JsonObject.mapFrom(transaction);
+//
+//            }
+//        }catch (Exception e){
+//            System.out.println("Lets handle it");
+//        }
+//    }
+//
     @Incoming("txn-from-kafka")
-    public void receive(Transaction transaction) {
-        System.out.println("inside consumer");
-        LOGGER.infof("Received movie:", transaction.getId(), transaction.getAmount());
-        try {
-            if (transaction.getMerchantId().equals("MERCH0001") && transaction.getCountry().equals("IR")) {
-                LOGGER.info("message check failed");
-            } else if(transaction.getCountry().equals("US") && transaction.getMerchantId().equals("MERCH0002")){
-                LOGGER.info("message check failed");
-            } else {
-                System.out.println("publised");
-                final JsonObject jsonObject = JsonObject.mapFrom(transaction);
-                jsonObjs.add(jsonObject);
-//                eventBus.<JsonObject>consumer("txn_stream",message -> System.out.println("Received news on consumer 1: " + message.body()));
-                emitter.send(transaction);
-            }
-        }catch (Exception e){
-            System.out.println("Lets handle it");
-        }
+    @Outgoing("my-data-stream")
+    @Broadcast
+    public String broadCastMessage(Transaction transaction){
+        System.out.println(transaction.getId());
+        return transaction.getId();
     }
 
-    public static List<JsonObject> returnEventBusContents() {
-       return jsonObjs;
-    }
+
 
 }

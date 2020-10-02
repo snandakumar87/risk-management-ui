@@ -1,6 +1,7 @@
 if (!!window.EventSource) {
     var eventSource = new EventSource("/stream");
     eventSource.onmessage = function(event) {
+    alert(event.data);
         data = JSON.parse(event.data);
 
         var row = '<tr><td>' + data.id + '</td><td>' + data.amount + '</td><td>' + data.country + '</td><td>' + data.merchantId + '</td><td>';
