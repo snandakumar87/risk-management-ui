@@ -24,6 +24,7 @@ public class TransactionConsumer {
 
     @Incoming("txn-from-kafka")
     public void receive(Transaction transaction) {
+        System.out.println("inside consumer");
         LOGGER.infof("Received movie:", transaction.getId(), transaction.getAmount());
         try {
             if (transaction.getMerchantId().equals("MERCH0001") && transaction.getCountry().equals("IR")) {
