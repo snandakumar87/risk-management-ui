@@ -1,5 +1,6 @@
 package com.redhat;
 
+import io.smallrye.mutiny.Multi;
 import io.vertx.core.json.JsonObject;
 import io.vertx.mutiny.core.eventbus.EventBus;
 import org.eclipse.microprofile.reactive.messaging.Channel;
@@ -9,6 +10,8 @@ import org.jboss.logging.Logger;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import java.util.ArrayList;
+import java.util.List;
 
 @ApplicationScoped
 public class TransactionConsumer {
@@ -16,11 +19,15 @@ public class TransactionConsumer {
     @Inject
     EventBus eventBus;
 
+    static List<JsonObject> jsonObjs = new ArrayList<>();
+
     @Inject
     @Channel("txn-whitelist")
     Emitter<Transaction> emitter;
 
-    private static final Logger LOGGER = Logger.getLogger("MovieConsumer");
+
+
+    private static final Logger LOGGER = Logger.getLogger("TransactionCins");
 
     @Incoming("txn-from-kafka")
     public void receive(Transaction transaction) {
@@ -34,13 +41,17 @@ public class TransactionConsumer {
             } else {
                 System.out.println("publised");
                 final JsonObject jsonObject = JsonObject.mapFrom(transaction);
-                eventBus.publish("txn_stream", jsonObject);
+                jsonObjs.add(jsonObject);
 //                eventBus.<JsonObject>consumer("txn_stream",message -> System.out.println("Received news on consumer 1: " + message.body()));
                 emitter.send(transaction);
             }
         }catch (Exception e){
             System.out.println("Lets handle it");
         }
+    }
+
+    public static List<JsonObject> returnEventBusContents() {
+       return jsonObjs;
     }
 
 }
