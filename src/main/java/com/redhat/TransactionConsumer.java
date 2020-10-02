@@ -32,8 +32,9 @@ public class TransactionConsumer {
             } else if(transaction.getCountry().equals("US") && transaction.getMerchantId().equals("MERCH0002")){
                 LOGGER.info("message check failed");
             } else {
+                System.out.println("publised");
                 final JsonObject jsonObject = JsonObject.mapFrom(transaction);
-                eventBus.publish("transaction_stream", jsonObject);
+                eventBus.publish("txn_stream", jsonObject);
                 emitter.send(transaction);
             }
         }catch (Exception e){
