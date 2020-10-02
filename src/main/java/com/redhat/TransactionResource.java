@@ -25,9 +25,8 @@ public class TransactionResource {
     {
         System.out.println("Came to post call");
 
-
-        return eventBus.<JsonObject>consumer("txn_stream",message -> System.out.println("Received news on consumer 1: " + message.body()))
-                .bodyStream().toMulti();
+        eventBus.<JsonObject>consumer("txn_stream",message -> System.out.println("Received news on consumer 1: " + message.body()));
+      return null;
     }
 
 
