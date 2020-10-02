@@ -35,6 +35,7 @@ public class TransactionConsumer {
                 System.out.println("publised");
                 final JsonObject jsonObject = JsonObject.mapFrom(transaction);
                 eventBus.publish("txn_stream", jsonObject);
+                eventBus.<JsonObject>consumer("txn_stream",message -> System.out.println("Received news on consumer 1: " + message.body()));
                 emitter.send(transaction);
             }
         }catch (Exception e){
