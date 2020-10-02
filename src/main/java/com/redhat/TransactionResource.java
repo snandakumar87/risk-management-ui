@@ -21,7 +21,7 @@ public class TransactionResource {
 
 
     @Inject
-    @Channel("my-data-stream")
+    @Channel("txn-topic")
     Publisher<String> transactionPublisher;
 
     @GET
