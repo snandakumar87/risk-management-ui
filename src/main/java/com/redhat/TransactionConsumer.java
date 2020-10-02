@@ -20,8 +20,6 @@ public class TransactionConsumer {
 
 
 
-    List<JsonObject> jsonObjs = new ArrayList<>();
-
 
 
     private static final Logger LOGGER = Logger.getLogger("TransactionCins");
@@ -45,8 +43,8 @@ public class TransactionConsumer {
 //        }
 //    }
 //
-    @Incoming("txn-from-kafka")
-    @Outgoing("my-data-stream")
+    @Incoming("txn-kafka")
+    @Outgoing("txn-topic")
     @Broadcast
     public String broadCastMessage(Transaction transaction){
         System.out.println(transaction.getId());
