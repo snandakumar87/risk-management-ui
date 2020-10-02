@@ -44,7 +44,7 @@ public class TransactionConsumer {
 //    }
 //
     @Incoming("txn-kafka")
-    @Outgoing("txn-topic")
+    @Outgoing("txn")
     @Broadcast
     public String broadCastMessage(Transaction transaction){
         System.out.println(transaction.getId());
