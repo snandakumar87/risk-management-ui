@@ -46,9 +46,8 @@ public class TransactionConsumer {
     @Incoming("txn-kafka")
     @Outgoing("txn")
     @Broadcast
-    public String broadCastMessage(Transaction transaction){
-        System.out.println(transaction.getId());
-        return transaction.getId();
+    public String broadCastMessage(String transaction){
+        return String.valueOf(transaction);
     }
 
 
