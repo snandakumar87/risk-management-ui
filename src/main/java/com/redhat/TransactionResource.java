@@ -45,7 +45,7 @@ public class TransactionResource {
     @GET
     @Path("/svg/{txnId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public ProcessUIObject getSvg(@PathParam("txnId") Integer txnId) throws JsonProcessingException {
+    public ProcessUIObject getSvg(@PathParam("txnId") Long txnId) throws JsonProcessingException {
         System.out.println("came here"+txnId);
         String response = processService.getProcess(String.valueOf(txnId));
         System.out.println(response);

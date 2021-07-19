@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class data implements Serializable {
     static final long serialVersionUID = 1L;
 
-    private java.lang.Integer transactionId;
+    private Long transactionId;
     private java.lang.Integer transactionAmount;
     private java.lang.String transactionCountry;
     private java.lang.String merchantType;
@@ -20,11 +20,11 @@ public class data implements Serializable {
     public data() {
     }
 
-    public java.lang.Integer getTransactionId() {
+    public Long getTransactionId() {
         return this.transactionId;
     }
 
-    public void setTransactionId(java.lang.Integer transactionId) {
+    public void setTransactionId(Long transactionId) {
         this.transactionId = transactionId;
     }
 
@@ -109,7 +109,7 @@ public class data implements Serializable {
         this.customerRiskIndex = customerRiskIndex;
     }
 
-    public data(java.lang.Integer transactionId,
+    public data(Long transactionId,
                 java.lang.Integer transactionAmount,
                 java.lang.String transactionCountry, java.lang.String merchantType,
                 java.lang.Double customerRiskIndex, java.lang.Boolean cityChange,
