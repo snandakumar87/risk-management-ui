@@ -5,7 +5,7 @@ if (!!window.EventSource) {
     eventSource.onmessage = function(event) {
 
         data = JSON.parse(event.data);
-        console.log("data"+JSON.parse(data));
+        console.log("data"+data.val());
         var row = "<td></td>";
 //        var row = '<tr><td>' + data.result.correlationId + '</td><td>' + data.result.subProcessCorrelationId + '</td><td>' ;
 //            row+='<div class="icon"><i class="ni ni-fat-remove"></i></td>';
