@@ -5,7 +5,7 @@ if (!!window.EventSource) {
     eventSource.onmessage = function(event) {
 
         data = JSON.parse(event.data);
-
+        alert(data);
         var row = '<tr><td>' + data.result.correlationId + '</td><td>' + data.result.subProcessCorrelationId + '</td><td>' ;
             row+='<div class="icon"><i class="ni ni-fat-remove"></i></td>';
             row+='<td><button class="btn btn-icon btn-primary" type="button" id="ajaxSubmit" onclick="checkout('+data.result.subProcessCorrelationId+')"><span class="btn-inner--icon">Details<i class="ni ni-bold-right"></i></span></button>';

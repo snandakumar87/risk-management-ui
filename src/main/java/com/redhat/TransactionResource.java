@@ -14,10 +14,7 @@ import org.eclipse.microprofile.rest.client.inject.RestClient;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Path("/transaction")
 public class TransactionResource {
@@ -38,6 +35,7 @@ public class TransactionResource {
     public Publisher<String> stream()
     {
         System.out.println("here");
+
 
         return transactionPublisher;
     }
