@@ -6,25 +6,11 @@ if (!!window.EventSource) {
 
         data = JSON.parse(event.data);
 
-        var row = '<tr><td>' + data.data.transactionId + '</td><td>' + data.data.transactionAmount + '</td><td>' ;
-         if(data.data.fraudAlert !== 'null') {
-           row+= data.data.fraudAlert + '</td><td>';
-         } else {
-           row+= '</td><td>';
-         }
-         if(data.data.amlAlert !== 'null') {
-          row+= data.data.amlAlert + '</td><td>';
-         } else {
-         row+='</td><td>';}
-
-         if(data.data.amlAlert==='null' && data.data.fraudAlert==='null'){
-            row+='<div class="icon"><i class="ni ni-check-bold"></i></td>'
-            row+='<td>No Investigation Required!';
-         } else {
+        var row = '<tr><td>' + data.result.correlationId + '</td><td>' + data.result.subProcessCorrelationId + '</td><td>' ;
             row+='<div class="icon"><i class="ni ni-fat-remove"></i></td>';
-            row+='<td><button class="btn btn-icon btn-primary" type="button" id="ajaxSubmit" onclick="checkout('+data.data.transactionId+')"><span class="btn-inner--icon">Details<i class="ni ni-bold-right"></i></span></button>';
+            row+='<td><button class="btn btn-icon btn-primary" type="button" id="ajaxSubmit" onclick="checkout('+data.result.subProcessCorrelationId+')"><span class="btn-inner--icon">Details<i class="ni ni-bold-right"></i></span></button>';
 
-         }
+
 
 
 

@@ -1,132 +1,101 @@
 package com.redhat;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 public class data implements Serializable {
     static final long serialVersionUID = 1L;
 
-    private Long transactionId;
-    private java.lang.Integer transactionAmount;
-    private java.lang.String transactionCountry;
-    private java.lang.String merchantType;
-    private Double customerRiskIndex;
-    private java.lang.Boolean cityChange;
-    private java.lang.Boolean marriage;
-    private java.lang.Boolean jobChange;
-    private java.lang.Integer averageTransactionAmount;
-    private java.lang.String fraudAlert;
-    private java.lang.String amlAlert;
+    private java.lang.String entityType;
+    private java.lang.String entityId;
+    private java.lang.Boolean allAccounts;
+
+    private java.lang.Double confidence;
+
+    private java.lang.String correlationId;
+
+    private java.lang.String subProcessCorrelationId;
 
     public data() {
     }
 
-    public Long getTransactionId() {
-        return this.transactionId;
+    private String id;
+    private Double valueAtRisk;
+    private LocalDateTime valueAtRiskAsOf;
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
     }
 
-    public void setTransactionId(Long transactionId) {
-        this.transactionId = transactionId;
+    public String getEntityType() {
+        return entityType;
     }
 
-    public java.lang.Integer getTransactionAmount() {
-        return this.transactionAmount;
+    public void setEntityType(String entityType) {
+        this.entityType = entityType;
     }
 
-    public void setTransactionAmount(java.lang.Integer transactionAmount) {
-        this.transactionAmount = transactionAmount;
+    public String getEntityId() {
+        return entityId;
     }
 
-    public java.lang.String getTransactionCountry() {
-        return this.transactionCountry;
+    public void setEntityId(String entityId) {
+        this.entityId = entityId;
     }
 
-    public void setTransactionCountry(java.lang.String transactionCountry) {
-        this.transactionCountry = transactionCountry;
+    public Boolean getAllAccounts() {
+        return allAccounts;
     }
 
-    public java.lang.String getMerchantType() {
-        return this.merchantType;
+    public void setAllAccounts(Boolean allAccounts) {
+        this.allAccounts = allAccounts;
     }
 
-    public void setMerchantType(java.lang.String merchantType) {
-        this.merchantType = merchantType;
+    public Double getConfidence() {
+        return confidence;
     }
 
-    public java.lang.Boolean getCityChange() {
-        return this.cityChange;
+    public void setConfidence(Double confidence) {
+        this.confidence = confidence;
     }
 
-    public void setCityChange(java.lang.Boolean cityChange) {
-        this.cityChange = cityChange;
+    public String getCorrelationId() {
+        return correlationId;
     }
 
-    public java.lang.Boolean getMarriage() {
-        return this.marriage;
+    public void setCorrelationId(String correlationId) {
+        this.correlationId = correlationId;
     }
 
-    public void setMarriage(java.lang.Boolean marriage) {
-        this.marriage = marriage;
+    public String getSubProcessCorrelationId() {
+        return subProcessCorrelationId;
     }
 
-    public java.lang.Boolean getJobChange() {
-        return this.jobChange;
+    public void setSubProcessCorrelationId(String subProcessCorrelationId) {
+        this.subProcessCorrelationId = subProcessCorrelationId;
     }
 
-    public void setJobChange(java.lang.Boolean jobChange) {
-        this.jobChange = jobChange;
+    public String getId() {
+        return id;
     }
 
-    public java.lang.Integer getAverageTransactionAmount() {
-        return this.averageTransactionAmount;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public void setAverageTransactionAmount(
-            java.lang.Integer averageTransactionAmount) {
-        this.averageTransactionAmount = averageTransactionAmount;
+    public Double getValueAtRisk() {
+        return valueAtRisk;
     }
 
-    public java.lang.String getFraudAlert() {
-        return this.fraudAlert;
+    public void setValueAtRisk(Double valueAtRisk) {
+        this.valueAtRisk = valueAtRisk;
     }
 
-    public void setFraudAlert(java.lang.String fraudAlert) {
-        this.fraudAlert = fraudAlert;
+    public LocalDateTime getValueAtRiskAsOf() {
+        return valueAtRiskAsOf;
     }
 
-    public java.lang.String getAmlAlert() {
-        return this.amlAlert;
+    public void setValueAtRiskAsOf(LocalDateTime valueAtRiskAsOf) {
+        this.valueAtRiskAsOf = valueAtRiskAsOf;
     }
-
-    public void setAmlAlert(java.lang.String amlAlert) {
-        this.amlAlert = amlAlert;
-    }
-
-    public java.lang.Double getCustomerRiskIndex() {
-        return this.customerRiskIndex;
-    }
-
-    public void setCustomerRiskIndex(java.lang.Double customerRiskIndex) {
-        this.customerRiskIndex = customerRiskIndex;
-    }
-
-    public data(Long transactionId,
-                java.lang.Integer transactionAmount,
-                java.lang.String transactionCountry, java.lang.String merchantType,
-                java.lang.Double customerRiskIndex, java.lang.Boolean cityChange,
-                java.lang.Boolean marriage, java.lang.Boolean jobChange,
-                java.lang.Integer averageTransactionAmount,
-                java.lang.String fraudAlert, java.lang.String amlAlert) {
-        this.transactionId = transactionId;
-        this.transactionAmount = transactionAmount;
-        this.transactionCountry = transactionCountry;
-        this.merchantType = merchantType;
-        this.customerRiskIndex = customerRiskIndex;
-        this.cityChange = cityChange;
-        this.marriage = marriage;
-        this.jobChange = jobChange;
-        this.averageTransactionAmount = averageTransactionAmount;
-        this.fraudAlert = fraudAlert;
-        this.amlAlert = amlAlert;
-    }
-
 }
