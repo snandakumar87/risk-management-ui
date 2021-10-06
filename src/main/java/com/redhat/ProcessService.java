@@ -18,7 +18,7 @@ public interface ProcessService {
     @Path("/server/queries/processes/instances/variables/subProcessCorrelationId")
     @Produces("application/json")
     @ClientHeaderParam(name="Authorization", value="Basic YWRtaW5Vc2VyOlJlZEhhdA==")
-    String getProcess(@javax.ws.rs.QueryParam("varValue") String txnId);
+    String getProcess(@javax.ws.rs.QueryParam("varValue") String txnId, @QueryParam("status") int status, @QueryParam("status") int status2);
 
     @GET
     @Path("/server/containers/risk-analytics-orchestrator_1.0.0-SNAPSHOT/processes/instances/{processInstanceId}/variables")

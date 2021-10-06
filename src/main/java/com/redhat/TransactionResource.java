@@ -45,7 +45,7 @@ public class TransactionResource {
     @Produces(MediaType.APPLICATION_JSON)
     public ProcessUIObject getSvg(@PathParam("txnId") Long txnId) throws JsonProcessingException {
         System.out.println("came here"+txnId);
-        String response = processService.getProcess(String.valueOf(txnId));
+        String response = processService.getProcess(String.valueOf(txnId),1,2);
         System.out.println(response);
 
         Map responseObj = new ObjectMapper().readValue(response,Map.class);
