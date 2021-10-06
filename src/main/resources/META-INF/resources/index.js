@@ -9,7 +9,7 @@ if (!!window.EventSource) {
 
         var row = '<tr><td>' + data.correlationId + '</td><td>' + data.subProcessCorrelationId + '</td><td>' + data.entityType + '</td><td>' + data.entityId  ;
             row+='<div class="icon"><i class="ni ni-fat-remove"></i></td>';
-            row+='<td><button class="btn btn-icon btn-primary" type="button" id="ajaxSubmit" onclick="checkout()"><span class="btn-inner--icon">Details<i class="ni ni-bold-right"></i></span></button>';
+            row+='<td><button class="btn btn-icon btn-primary" type="button" id="ajaxSubmit" onclick="checkout("'+data.correlationId+'")"><span class="btn-inner--icon">Details<i class="ni ni-bold-right"></i></span></button>';
 
 
 
@@ -28,7 +28,7 @@ if (!!window.EventSource) {
 
 function checkout(transactionId) {
 window.alert("came here");
-//window.open("/TransactionDetails.html?txnId="+transactionId, '_blank');
+window.open("/TransactionDetails.html?txnId="+transactionId, '_blank');
 
 
 }
