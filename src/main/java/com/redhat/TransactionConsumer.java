@@ -1,5 +1,7 @@
 package com.redhat;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.smallrye.mutiny.Multi;
 import io.smallrye.reactive.messaging.annotations.Broadcast;
 import io.vertx.core.json.JsonObject;
@@ -14,6 +16,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @ApplicationScoped
 public class TransactionConsumer {
@@ -46,8 +49,11 @@ public class TransactionConsumer {
     @Incoming("txn-kafka")
     @Outgoing("txn")
     @Broadcast
-    public String broadCastMessage(String transaction){
-        return String.valueOf(transaction);
+    public String broadCastMessage(String transaction) throws JsonProcessingException {
+        Map valueMap = new ObjectMapper().readValue(transaction, Map.class);
+        String resp = (String) valueMap.get("data");
+        return new ObjectMapper().writeValueAsString(resp);
+
     }
 
 
