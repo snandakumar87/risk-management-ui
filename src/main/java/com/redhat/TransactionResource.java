@@ -58,10 +58,10 @@ public class TransactionResource {
 
         Map processVarMap=new ObjectMapper().readValue(processService.getProcessInstanceId(String.valueOf(map.get("process-instance-id"))), HashMap.class);
 
-        Map varMa = (Map) processVarMap.get("data");
+        String varMa = (String) processVarMap.get("data");
 
         ProcessUIObject processUIObject = new ProcessUIObject();
-        processUIObject.setProcessVariables(varMa);
+        processUIObject.setProcessVariables(new ObjectMapper().readValue(varMa,Map.class));
         processUIObject.setSvg(svg);
 
         List<TaskInstance> taskInstances = new ArrayList<>();
