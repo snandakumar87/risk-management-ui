@@ -52,7 +52,7 @@ public class TransactionConsumer {
     public String broadCastMessage(String transaction) throws JsonProcessingException {
         Map valueMap = new ObjectMapper().readValue(transaction, Map.class);
         String resp = (String) valueMap.get("data");
-        return new ObjectMapper().writeValueAsString(resp);
+        return resp.replace("\\","");
 
     }
 
