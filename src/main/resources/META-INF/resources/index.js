@@ -7,9 +7,9 @@ if (!!window.EventSource) {
         data = JSON.parse(event.data);
         console.log("data"+JSON.stringify(data));
 
-        var row = '<tr><td>' + data.data.correlationId + '</td><td>' + data.data.valueAtRisk + '</td><td>' + data.data.entityType + '</td><td>' + data.data.entityId  ;
+        var row = '<tr><td>' + data.data.correlationId + '</td><td>' + data.data.subProcessCorrelationId + '</td><td>' + data.data.entityType + '</td><td>' + data.data.entityId  ;
             row+='<div class="icon"><i class="ni ni-fat-remove"></i></td>';
-            row+='<td><button class="btn btn-icon btn-primary" type="button" id="ajaxSubmit" onclick="checkout('+data.result.subProcessCorrelationId+')"><span class="btn-inner--icon">Details<i class="ni ni-bold-right"></i></span></button>';
+            row+='<td><button class="btn btn-icon btn-primary" type="button" id="ajaxSubmit" onclick="checkout('+data.data.subProcessCorrelationId+')"><span class="btn-inner--icon">Details<i class="ni ni-bold-right"></i></span></button>';
 
 
 
