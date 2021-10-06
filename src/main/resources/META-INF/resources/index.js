@@ -27,7 +27,7 @@ if (!!window.EventSource) {
 }
 
 function checkout(transactionId) {
-window.alert("came here");
+
 window.open("/TransactionDetails.html?txnId="+transactionId, '_blank');
 
 
