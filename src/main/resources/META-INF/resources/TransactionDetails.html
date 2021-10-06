@@ -17,21 +17,23 @@
 <html>
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <title>Transaction Monitoring System</title>
-  <!-- Favicon -->
+  <link rel="stylesheet" href="css/patternfly.min.css">
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/patternfly-additions.min.css">
+  <link rel="stylesheet" href="css/mystyles.css">
+  <link rel="stylesheet" href="css/patternfly.css">
+  <link rel="stylesheet" href="css/patternfly-additions.min.css">
+  <script src="components/c3/c3.min.js"></script>
+  <script src="components/d3/d3.min.js"></script>
 
-  <!-- Fonts -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
-  <!-- Icons -->
-  <link rel="stylesheet" href="../assets/vendor/nucleo/css/nucleo.css" type="text/css">
-  <link rel="stylesheet" href="../assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
-  <!-- Page plugins -->
-  <!-- Argon CSS -->
-  <link href="/assets/vendor/nucleo/css/nucleo.css" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/css/argon.css?v=1.2.0" type="text/css">
+  <!-- Bootstrap base + PatternFly extensions + Your styles -->
+  <link rel="stylesheet" href="css/mystyles.css">
+
+  <!-- JS -->
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/patternfly.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 
 
@@ -96,63 +98,55 @@
               </ul>
             </li>
             <li class="divider"></li>
-            <li>
-              <a href="#">One more separated link</a>
-            </li>
+
           </ul>
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-primary">
         <li>
-          <a href="#">Market Risk</a>
+          <a href="#">Market Risk > Admin</a>
         </li>
 
       </ul>
     </div>
   </nav>
   <!-- Main content -->
-  <div class="main-content" id="panel">
-    <!-- Topnav -->
+
 
 
     <!-- Page content -->
-    <div class="container-fluid mt--6">
-      <div class="row">
+
+  <div class="container-fluid container-cards-pf">
 
 
-      </div>
-      <div class="row">
-
-
-      </div>
       <div class="col-xs-12 col-lg-12 col-md-5">
         <div class="card-pf">
           <div class="card-pf-heading">
             <div class="col-md-12 col-md-12 col-md-12">
               <div class="container-fluid container-cards-pf">
                   <div width="54px" height="54px"  id="svgDiv"></div>
-<hr/>
-                  <h3 class="mb-0">Process Variables</h3>
-                  <br/>
-                  <div class="table-responsive">
+
+                  <h3>Process Variables</h3>
+
+
                     <!-- Projects table -->
-                    <table class="table align-items-center table-flush">
+                    <table class="table table-striped table-bordered table-hover" >
                       <thead>
                       <th><h4>Property</h4></th>
                       <th><h4>Value</h4></th>
                       </thead>
                       <tr ng-repeat='(key, value) in processVariables'>
-                        <td class="display-4">{{key}}</td> <td ng-show="value!=='null'" class="display-4">{{value}}</td> <td ng-show="value==='null'" class="display-4"></td>
+                        <td >{{key}}</td> <td ng-show="value!=='null'" >{{value}}</td> <td ng-show="value==='null'" ></td>
 
 
                       </tr>
                     </table>
                     <hr/>
-                    <h3 class="mb-0">Task Details</h3>
-                    <br/>
-                    <div class="table-responsive">
+                    <h3 >Task Details</h3>
+
+                    <div>
                       <!-- Projects table -->
-                      <table class="table align-items-center table-flush">
+                      <table class="table table-striped table-bordered table-hover" >
                         <thead>
                         <th><h4>Task Id</h4></th>
                         <th><h4>Task Name</h4></th>
@@ -160,10 +154,10 @@
                         <th><h4>Task Status</h4></th>
                         </thead>
                         <tr ng-repeat='x in taskList'>
-                          <td class="display-4">{{x.taskId}}</td>
-                          <td class="display-4">{{x.taskName}}</td>
-                          <td class="display-4">{{x.owner}}</td>
-                          <td class="display-4">{{x.status}}</td>
+                          <td >{{x.taskId}}</td>
+                          <td >{{x.taskName}}</td>
+                          <td >{{x.owner}}</td>
+                          <td >{{x.status}}</td>
                         </tr>
                       </table>
 
@@ -173,7 +167,7 @@
               </div>
             </div>
 
-          </div>
+
         </div>
 
       </div>
