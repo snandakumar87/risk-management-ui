@@ -1,9 +1,9 @@
 if (!!window.EventSource) {
-    alert('here');
+   
     var eventSource = new EventSource("/transaction/stream");
 
     eventSource.onmessage = function(event) {
-    alert('here');
+    
 
         data = JSON.parse(event.data);
         console.log("data"+JSON.stringify(data));
