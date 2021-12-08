@@ -130,5 +130,32 @@ public class TransactionResource {
         return processUIObject;
     }
 
+    @GET
+    @Path("/processes")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<ProcessDefinition> getProcesses() throws JsonProcessingException {
+        ProcessDefinition processUIObject = null;
+        List<ProcessDefinition> response = new ArrayList<>();
+
+        Map process = new ObjectMapper().readValue(processService.getProcesses("VarBreachCheckWorkflow"),Map.class);
+
+        List<Map> processList = (List) process.get("process-instance");
+
+        for(Map map: processList) {
+            processUIObject = new ProcessDefinition();
+            Map processVarMap=new ObjectMapper().readValue(processService.getProcessInstanceId(map.get("process-instance-id").toString()), HashMap.class);
+            String varMa = (String) processVarMap.get("data");
+            Map varMap = new ObjectMapper().readValue(varMa,Map.class);
+            processUIObject.setCorrelationId((String) varMap.get("correlationId"));
+            processUIObject.setSubProcessCorrelationId(varMap.get("subProcessCorrelationId").toString());
+            processUIObject.setEntityId((String) varMap.get("entityId"));
+            processUIObject.setEntityType((String) varMap.get("entityType"));
+            response.add(processUIObject);
+
+        }
+
+        return response;
+    }
+
     
 }

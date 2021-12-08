@@ -11,15 +11,41 @@
       crossorigin="anonymous"
     />
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 
     <title>PatternFly Primary-detail expanded CodeSandbox Example</title>
 
-    <script src="index.js"></script>
+    <script>
+       var app = angular.module('myApp', []);
+      app.controller('FormController', function($scope,$http,$sce) {
+ var baseURL = window.location.protocol + '//' + window.location.host;
+       $http({
+        url: baseURL+"/transaction/processes",
+        method: "GET"
+
+    })
+    .then(function(response) {
+
+      $scope.cases = response.data;
+
+
+    });
+
+   $scope.caseDetails = function(transactionId) {
+
+window.open("/casedetails.html?txnId="+transactionId, '_blank');
+
+
+
+}
+});
+
+    </script>
 
   </head>
 
 
-  <body>
+  <body ng-app="myApp" ng-controller="FormController">
     <div class="pf-c-page" id="primary-detail-expanded-example">
       <a
         class="pf-c-skip-to-content pf-c-button pf-m-primary"
@@ -218,7 +244,8 @@
 
                     </tr>
                     </thead>
-                    <tbody id="tbody">
+                    <tbody ng-repeat="x in cases" role="rowgroup">
+                    <tr role="row"><td role="cell">{{x.correlationId}}</td><td>{{x.subProcessCorrelationId}}</td><td>{{x.entityType}}</td><td>{{x.entityId}}</td><td><button  class="pf-c-button pf-m-primary" ng-click="caseDetails(x.subProcessCorrelationId)">Details</button></td></tr>
 
                     </tbody>
                   </table>

@@ -32,5 +32,13 @@ public interface ProcessService {
     @ClientHeaderParam(name="Authorization", value="Basic YWRtaW5Vc2VyOlJlZEhhdA==")
     String getTasks(@javax.ws.rs.PathParam("processInstanceId") String processInstanceId);
 
+    @GET
+    @Path("/server/queries/processes/instances")
+    @Produces("application/json")
+    @ClientHeaderParam(name="Authorization", value="Basic YWRtaW5Vc2VyOlJlZEhhdA==")
+    String getProcesses(@javax.ws.rs.QueryParam("processName") String processName);
+
+
+
 
 }
