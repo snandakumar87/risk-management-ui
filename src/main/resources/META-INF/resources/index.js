@@ -32,4 +32,5 @@ function checkout(transactionId) {
 window.open("/casedetails.html?txnId="+transactionId, '_blank');
 
 
+
 }
