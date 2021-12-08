@@ -50,8 +50,10 @@ public class TransactionConsumer {
     @Outgoing("txn")
     @Broadcast
     public String broadCastMessage(String transaction) throws JsonProcessingException {
+        System.out.println(transaction);
         Map valueMap = new ObjectMapper().readValue(transaction, Map.class);
         String resp = (String) valueMap.get("data");
+        System.out.println(resp);
         return resp.replace("\\","");
 
     }

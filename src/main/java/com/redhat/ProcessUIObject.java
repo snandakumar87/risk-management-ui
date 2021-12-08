@@ -7,6 +7,15 @@ public class ProcessUIObject {
     String svg;
     Map processVariables;
     List<TaskInstance> taskList;
+    String processId;
+
+    public String getProcessId() {
+        return processId;
+    }
+
+    public void setProcessId(String processId) {
+        this.processId = processId;
+    }
 
     public List<TaskInstance> getTaskList() {
         return taskList;

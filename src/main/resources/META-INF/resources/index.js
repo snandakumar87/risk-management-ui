@@ -1,8 +1,9 @@
 if (!!window.EventSource) {
-
+    alert('here');
     var eventSource = new EventSource("/transaction/stream");
 
     eventSource.onmessage = function(event) {
+    alert('here');
 
         data = JSON.parse(event.data);
         console.log("data"+JSON.stringify(data));
@@ -28,7 +29,7 @@ if (!!window.EventSource) {
 
 function checkout(transactionId) {
 
-window.open("/TransactionDetails.html?txnId="+transactionId, '_blank');
+window.open("/casedetails.html?txnId="+transactionId, '_blank');
 
 
 }

@@ -27,10 +27,10 @@ public interface ProcessService {
     String getProcessInstanceId(@javax.ws.rs.PathParam("processInstanceId") String processInstanceId);
 
     @GET
-    @Path("/server/queries/tasks/instances/admins")
+    @Path("/server/queries/tasks/instances/process/{processInstanceId}")
     @Produces("application/json")
     @ClientHeaderParam(name="Authorization", value="Basic YWRtaW5Vc2VyOlJlZEhhdA==")
-    String getTasks();
+    String getTasks(@javax.ws.rs.PathParam("processInstanceId") String processInstanceId);
 
 
 }

@@ -14,6 +14,7 @@ import org.eclipse.microprofile.rest.client.inject.RestClient;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 @Path("/transaction")
@@ -50,7 +51,7 @@ public class TransactionResource {
 
         Map responseObj = new ObjectMapper().readValue(response,Map.class);
         List processList = (List) responseObj.get("process-instance");
-        Map<String,String> map = (Map<String, String>) processList.get(0);
+        Map map = (Map) processList.get(0);
 
         System.out.println(String.valueOf(map.get("process-instance-id")));
 
@@ -62,22 +63,61 @@ public class TransactionResource {
 
         ProcessUIObject processUIObject = new ProcessUIObject();
         processUIObject.setProcessVariables(new ObjectMapper().readValue(varMa,Map.class));
+        System.out.println(map.get("process-instance-id"));
+        processUIObject.setProcessId(map.get("process-instance-id")+"");
         processUIObject.setSvg(svg);
 
+
+        return processUIObject;
+    }
+
+
+    @GET
+    @Path("/processdata/{processId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public ProcessUIObject getProcessVariables(@PathParam("processId") String processId) throws JsonProcessingException {
+        ProcessUIObject processUIObject = new ProcessUIObject();
+        Map processVarMap=new ObjectMapper().readValue(processService.getProcessInstanceId(processId), HashMap.class);
+
+        String varMa = (String) processVarMap.get("data");
+        processUIObject.setProcessVariables(new ObjectMapper().readValue(varMa,Map.class));
+        return processUIObject;
+    }
+
+    @GET
+    @Path("/decisionnodedata/{processId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public ProcessUIObject getDecisionNodeData(@PathParam("processId") String processId) throws JsonProcessingException {
+        ProcessUIObject processUIObject = new ProcessUIObject();
+        Map processVarMap=new ObjectMapper().readValue(processService.getProcessInstanceId(processId), HashMap.class);
+
+        String varMa = (String) processVarMap.get("data");
+
+        Map<String,String> decisionNodeMap = new HashMap<>();
+        decisionNodeMap.put("thresholdCalculation", (String) processVarMap.get("thresholdCalculation"));
+        decisionNodeMap.put("limit", String.valueOf(processVarMap.get("limit")));
+
+
+        processUIObject.setProcessVariables(decisionNodeMap);
+        return processUIObject;
+    }
+
+    @GET
+    @Path("/tasks/{processId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public ProcessUIObject getTasks(@PathParam("processId") String processId) throws JsonProcessingException {
+       ProcessUIObject processUIObject = new ProcessUIObject();
         List<TaskInstance> taskInstances = new ArrayList<>();
 
         TaskInstance taskInstance;
-
-        String processInstanceId = String.valueOf(map.get("process-instance-id"));
-
-        Map taskListObj = new ObjectMapper().readValue(processService.getTasks(),Map.class);
+        Map taskListObj = new ObjectMapper().readValue(processService.getTasks(processId),Map.class);
         List<Map> taskList = (List<Map>) taskListObj.get("task-summary");
         System.out.println(taskList);
-        System.out.println(processInstanceId);
+        System.out.println(processId);
 
         for(Map taskMapObj: taskList) {
 
-            if(String.valueOf(taskMapObj.get("task-proc-inst-id")).equals(processInstanceId)){
+            if(String.valueOf(taskMapObj.get("task-proc-inst-id")).equals(processId)){
                 taskInstance = new TaskInstance();
                 taskInstance.setTaskId(String.valueOf(taskMapObj.get("task-id")));
                 taskInstance.setTaskName((String) taskMapObj.get("task-name"));
@@ -87,13 +127,8 @@ public class TransactionResource {
             }
         }
         processUIObject.setTaskList(taskInstances);
-
-
         return processUIObject;
     }
-
-
-
 
     
 }
